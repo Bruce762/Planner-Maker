@@ -207,7 +207,7 @@ function renderExportCanvas(p,index,scale=1.5,override=null){
  if(s.monthNotes){const w=(W-2*M-9*u)/2;[['重點',s.monthFocusLabel],['備忘',s.monthMemoLabel]].forEach(([k,t],i)=>{const x=M+i*(w+9*u),yy=gridBottom+5*u;text(t,x,yy,3.4);note(`month-${s.year}-${p.m}-${k}`,x,yy+6*u,w,s.monthNotes*8*u,3.2,8,true);});}
  }else if(p.type==='year'){
  const top=head('YEAR AT A GLANCE',`${s.year} 全年日曆`),cw=(W-2*M-12*u)/3,rh=(bodyBottom-top)/4,wd=weekDays();
- for(let m=1;m<=12;m++){const x=M+((m-1)%3)*(cw+6*u),y=top+Math.floor((m-1)/3)*rh; text(`${String(m).padStart(2,'0')} 月`,x,y,4.1);link(`month-${m}`,x,y,cw,rh);const cell=cw/7;wd.forEach((d,j)=>text('日一二三四五六'[d],x+j*cell,y+10*u,2.8,[0,6].includes(d)?accent:ink));monthCells(m).forEach((d,j)=>{if(d)text(d,x+j%7*cell,y+18*u+Math.floor(j/7)*6*u,2.8,[0,6].includes(wd[j%7])?accent:ink);});}
+ for(let m=1;m<=12;m++){const x=M+((m-1)%3)*(cw+6*u),y=top+Math.floor((m-1)/3)*rh; text(`${String(m).padStart(2,'0')} 月`,x,y,4.1);link(`month-${m}`,x,y,cw,rh);const cell=cw/7;c.save();c.textAlign='center';wd.forEach((d,j)=>text('日一二三四五六'[d],x+(j+.5)*cell,y+10*u,2.8,[0,6].includes(d)?accent:ink));monthCells(m).forEach((d,j)=>{if(d)text(d,x+(j%7+.5)*cell,y+18*u+Math.floor(j/7)*6*u,2.8,[0,6].includes(wd[j%7])?accent:ink);});c.restore();}
  }else if(p.type==='goals'){
  const top=head('INTENTIONS',s.goalsTitle,s.goalsSubtitle),rh=(bodyBottom-top)/s.goalTitles.length;
  s.goalTitles.forEach((t,i)=>{const y=top+i*rh;text(t,M,y,4.6);note(`${s.year}-goal-${i}`,M,y+10*u,W-2*M,rh-16*u,3.4,s.lineGap,true);});
